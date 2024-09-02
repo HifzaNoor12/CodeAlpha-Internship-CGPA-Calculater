@@ -1,0 +1,91 @@
+Code:  
+#include <iostream>
+#include <string>
+using namespace std;
+float gradepoints(string grade)
+{
+    if (grade == "A+") 
+    return 4.5;
+    if (grade == "A") 
+    return 4.0;
+    if (grade == "B+") 
+    return 3.5;
+    if (grade == "B") 
+    return 3.0;
+    if (grade == "C+") 
+    return 2.5;
+    if (grade == "C") 
+    return 2.0;
+    if (grade == "D+") 
+    return 1.5;
+    if (grade == "D") 
+    return 1.0;
+    if (grade == "F") 
+    return 0.0;
+    return 0;
+}
+int main() {
+    int totalcredithrsallsems = 0;
+    float totalgradepointsallsems = 0.0;
+    string numOfsems;
+    cout << "Enter number of completed semesters: ";
+    getline(cin,  numOfsems);
+    int  numberofsems = stoi(numOfsems);
+    if (numberofsems > 0)
+    {
+        for (int i = 1; i <=numberofsems; ++i) 
+        {
+            string numOfcourses;
+            cout << "\nEnter number of courses in semester " << i << ": ";
+            getline(cin,  numOfcourses);
+            int numberOfcourses = stoi( numOfcourses);
+            float totalgradepointsthisSem = 0.0;
+            int totalcreditsthisSem = 0;
+            for (int j = 0; j < numberOfcourses; ++j)
+            {
+                string courseName;
+                string grade;
+                int credithours;
+                cout << "\nEnter details for course " << j + 1 << ":\n";
+                cout << "enter course Name: ";
+                getline(cin, courseName);
+                cout << "enter grade (A+, A, B+, B, C+, C, D+, D, F): ";
+                getline(cin, grade);
+                cout << "enter credit hours: ";
+                string creditHours;
+                getline(cin, creditHours);
+                credithours = stoi(creditHours);
+                totalgradepointsthisSem += gradepoints(grade) * credithours;
+                totalcreditsthisSem += credithours;
+                cout<< " course name :" << courseName;
+                cout<< " grade:" << grade;
+                cout<< " credit hours:" << credithours<<endl;
+            }
+            totalcredithrsallsems += totalcreditsthisSem;
+            totalgradepointsallsems += totalgradepointsthisSem;
+            float semgpa;
+            if( totalcreditsthisSem > 0)  
+            semgpa=totalgradepointsthisSem / totalcreditsthisSem;
+            else
+            {
+                0.0;
+            }
+            cout << "gpa for semester " << i << ": " << semgpa << endl;
+            cout << "total credits this semester: " << totalcreditsthisSem << endl;
+            cout << "total grade points this semester: " << totalgradepointsthisSem << endl;
+        }
+        float cgpa;//cgpa calculation
+        if (totalcredithrsallsems > 0) 
+        {
+            cgpa = totalgradepointsallsems / totalcredithrsallsems;
+        } 
+        else 
+        {
+            cgpa = 0.0;
+        }
+        cout << "\nCumulative GPA (CGPA): " << cgpa << endl;
+    } 
+    else 
+    {
+        cout << "No semesters completed yet." << endl;
+     return 0;}
